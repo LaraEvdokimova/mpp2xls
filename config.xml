@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<!-- Usage: 1. edit the file names 2. comment/uncomment the <columns> as 
+	needed 3. run the program: java -jar -->
+<config xmlns:mpxj="net.sf.mpxj">
+
+	<!-- 1. F I L E N A M E S -->
+	<!-- type = [mpp|mpx] -->
+	<infile type="mpp">test.mpp</infile>
+	<!-- only .xls supported -->
+	<outfile>test.xls</outfile>
+
+	<!-- sheets to be created in workbook -->
+	<tables>true</tables>
+	<calendars>false</calendars>
+	<tasks>true</tasks>
+	<resources>false</resources>
+
+	<!-- 2. U N / C O M M E N T C O L U M N S A S N E E D E D -->
+	<columns>
+		<!-- http://www.mpxj.org/apidocs/index.html -->
+		<column type="java.lang.String">Active</column>
+		<column type="java.util.List" of="ActivityCodeValue">ActivityCodes</column>
+		<column type="java.lang.Number">ActualCost</column>
+		<column type="net.sf.mpxj.Duration">ActualDuration</column>
+		<column type="java.util.Date">ActualFinish</column>
+		<column type="java.lang.Number">ActualOvertimeCost</column>
+		<column type="net.sf.mpxj.Duration">ActualOvertimeWork</column>
+		<column type="net.sf.mpxj.Duration">ActualOvertimeWorkProtected</column>
+		<column type="java.util.Date">ActualStart</column>
+		<column type="net.sf.mpxj.Duration">ActualWork</column>
+		<column type="net.sf.mpxj.Duration">ActualWorkProtected</column>
+		<column type="java.lang.Number">ACWP</column>
+		<column type="java.lang.Number">BaselineCost</column>
+		<column type="net.sf.mpxj.Duration">BaselineDuration</column>
+		<column type="java.lang.String">BaselineDurationText</column>
+		<column type="net.sf.mpxj.Duration">BaselineEstimatedDuration</column>
+		<column type="java.util.Date">BaselineEstimatedFinish</column>
+		<column type="java.lang.String">BaselineEstimatedStart</column>
+		<column type="java.util.Date">BaselineFinish</column>
+		<column type="java.lang.String">BaselineFinishText</column>
+		<column type="java.lang.Number">BaselineFixedCost</column>
+		<column type="java.lang.Number">BaselineFixedCostAccrual</column>
+		<column type="java.util.Date">BaselineStart</column>
+		<column type="java.lang.String">BaselineStartText</column>
+		<column type="net.sf.mpxj.Duration">BaselineWork</column>
+		<column type="java.lang.Number">BCWP</column>
+		<!-- <column type="java.lang.Number">BCWS</column> -->
+		<!-- <column type="java.lang.Object">CachedValue</column> -->
+		<column type="net.sf.mpxj.ProjectCalendar">Calendar</column>
+		<!-- <column type="java.lang.String">CalendarUniqueID</column> -->
+		<!-- <column type="java.lang.String">ChildTasks</column> -->
+		<!-- <column type="java.lang.String">CompleteThrough</column> -->
+		<!-- <column type="java.lang.String">Confirmed</column> -->
+		<!-- <column type="java.lang.String">ConstraintDate</column> -->
+		<!-- <column type="java.lang.String">ConstraintType</column> -->
+		<!-- <column type="java.lang.String">Contact</column> -->
+		<!-- <column type="java.lang.String">Cost</column> -->
+		<!-- <column type="java.lang.String">CostVariance</column> -->
+		<!-- <column type="java.lang.String">CreateDate</column> -->
+		<column type="java.lang.String">Critical</column>
+		
+		<!-- don't use this one! -->
+<!-- 		<column type="java.lang.String">CurrentValue</column> -->
+		<column type="java.lang.String">CV</column>
+
+		<!-- getDate(int) 1..10 -->
+		<!-- <column type="java.lang.String">Date</column> -->
+
+		<column type="java.lang.String">Deadline</column>
+		<column type="java.lang.String">Duration</column>
+		<!-- <column type="java.lang.String">DurationText</column> -->
+		<!-- <column type="java.lang.String">DurationVariance</column> -->
+		<!-- <column type="java.lang.String">EarlyFinish</column> -->
+		<!-- <column type="java.lang.String">EarlyStart</column> -->
+		<!-- <column type="java.lang.String">EarnedValueMethod</column> -->
+		<!-- <column type="java.lang.String">EffectiveCalendar</column> -->
+		<!-- <column type="java.lang.String">EffortDriven</column> -->
+		<!-- <column type="java.lang.String">EnterpriseCost</column> -->
+		<!-- <column type="java.lang.String">EnterpriseCustomField</column> -->
+		<!-- <column type="java.lang.String">EnterpriseDate</column> -->
+		<!-- <column type="java.lang.String">EnterpriseDuration</column> -->
+		<!-- <column type="java.lang.String">EnterpriseFlag</column> -->
+		<!-- <column type="java.lang.String">EnterpriseNumber</column> -->
+		<!-- <column type="java.lang.String">EnterpriseText</column> -->
+		<!-- <column type="java.lang.String">Estimated</column> -->
+		<!-- <column type="java.lang.String">ExistingResourceAssignment</column> -->
+		<!-- <column type="java.lang.String">Expanded</column> -->
+		<!-- <column type="java.lang.String">ExternalTask</column> -->
+		<!-- <column type="java.lang.String">ExternalTaskProject</column> -->
+		<!-- <column type="java.lang.String">FieldByAlias</column> -->
+		<column type="java.util.Date">Finish</column>
+		<!-- <column type="Duration">FinishSlack</column> -->
+		<!-- <column type="java.lang.String">FinishText</column> -->
+		<!-- <column type="Duration">FinishVariance</column> -->
+		<!-- <column type="java.lang.Number">FixedCost</column> -->
+		<!-- <column type="java.lang.String">FixedCostAccrual</column> -->
+
+		<column type="java.lang.Boolean">
+			<name>FLAG1</name>
+			<method>getFlag</method>
+			<params>
+				<parameter type="java.lang.Integer">1</parameter>
+			</params>
+		</column>
+
+		<column type="Duration">FreeSlack</column>
+		<column type="java.util.UUID">GUID</column>
+		<!-- <column type="java.lang.String">HideBar</column> -->
+		<!-- <column type="java.lang.String">Hyperlink</column> -->
+		<!-- <column type="java.lang.String">HyperlinkAddress</column> -->
+		<!-- <column type="java.lang.String">HyperlinkSubAddress</column> -->
+		<column type="java.lang.Integer">ID</column>
+		<!-- <column type="java.lang.String">IgnoreResourceCalendar</column> -->
+		<!-- <column type="java.lang.String">LateFinish</column> -->
+		<!-- <column type="java.lang.String">LateStart</column> -->
+		<!-- <column type="java.lang.String">LevelAssignments</column> -->
+		<!-- <column type="java.lang.String">LevelingCanSplit</column> -->
+		<!-- <column type="java.lang.String">LevelingDelay</column> -->
+		<!-- <column type="java.lang.String">LevelingDelayFormat</column> -->
+		<!-- <column type="java.lang.Boolean">LinkedFields</column> -->
+		<!-- <column type="Duration">ManualDuration</column> -->
+		<!-- <column type="java.lang.Boolean">Marked</column> -->
+		<column type="java.lang.Boolean">Milestone</column>
+		<column type="java.lang.String">Name</column>
+		<column type="java.lang.String">Notes</column>
+		<column type="java.lang.Boolean">Null</column>
+		<!-- getNumber(index) -->
+		<!-- <column type="java.lang.String" params="1">Number</column> -->
+		<!-- <column type="java.lang.String">Objects</column> -->
+
+		<!-- <column type="java.lang.String">OutlineCode</column> -->
+		<column type="java.lang.String">
+			<name>OUTLINECODE1</name>
+			<method>getOutlineCode</method>
+			<params>
+				<parameter type="int">1</parameter>
+			</params>
+		</column>
+
+		<column type="java.lang.Integer">OutlineLevel</column>
+		<column type="java.lang.String">OutlineNumber</column>
+		<column type="java.lang.Boolean">OverAllocated</column>
+		<column type="java.lang.Number">OvertimeCost</column>
+		<column type="net.sf.mpxj.Duration">OvertimeWork</column>
+		<column type="net.sf.mpxj.Task">ParentTask</column>
+		<column type="java.lang.Number">PercentageComplete</column>
+		<!-- <column type="java.lang.Number">PercentageWorkComplete</column> -->
+		<!-- <column type="java.lang.Number">PhysicalPercentComplete</column> -->
+		<column type="java.util.List" of="net.sf.mpxj.Relation">Predecessors</column>
+		<!-- <column type="java.util.Date">PreleveledFinish</column> -->
+		<!-- <column type="java.util.Date">PreleveledStart</column> -->
+		<column type="net.sf.mpxj.Priority">Priority</column>
+		<column type="java.lang.String">Project</column>
+		<!-- <column type="java.lang.Boolean">Recurring</column> -->
+		<!-- <column type="net.sf.mpxj.RecurringTask">RecurringTask</column> -->
+		<!-- <column type="java.lang.String">RegularWork</column> -->
+		<!-- <column type="java.lang.String">RemainingCost</column> -->
+		<!-- <column type="java.lang.String">RemainingDuration</column> -->
+		<!-- <column type="java.lang.String">RemainingEarlyFinish</column> -->
+		<!-- <column type="java.lang.String">RemainingEarlyStart</column> -->
+		<!-- <column type="java.lang.String">RemainingOvertimeCost</column> -->
+		<!-- <column type="java.lang.String">RemainingOvertimeWork</column> -->
+		<!-- <column type="java.lang.String">RemainingWork</column> -->
+		<!-- <column type="java.util.List" of="ResourceAssignment">ResourceAssignments</column> -->
+		<!-- <column type="java.lang.String">ResourceGroup</column> -->
+		<!-- <column type="java.lang.String">ResourceInitials</column> -->
+		<column type="java.lang.String">ResourceNames</column>
+		<!-- <column type="java.lang.String">Resume</column> -->
+		<!-- <column type="java.lang.String">ResumeValid</column> -->
+		<!-- <column type="java.lang.String">Rollup</column> -->
+		<!-- <column type="java.lang.String">SplitCompleteDuration</column> -->
+		<!-- <column type="java.lang.String">Splits</column> -->
+		<column type="java.util.Date">Start</column>
+		<!-- <column type="java.lang.String">StartSlack</column> -->
+		<!-- <column type="java.lang.String">StartText</column> -->
+		<!-- <column type="java.lang.String">StartVariance</column> -->
+		<column type="java.util.Date">Stop</column>
+		<!-- <column type="java.lang.String">SubProject</column> -->
+		<!-- <column type="java.lang.String">SubprojectName</column> -->
+		<!-- <column type="java.lang.String">SubprojectReadOnly</column> -->
+		<!-- <column type="java.lang.String">SubprojectTaskID</column> -->
+		<!-- <column type="java.lang.String">SubprojectTasksUniqueIDOffset</column> -->
+		<!-- <column type="java.lang.String">SubprojectTaskUniqueID</column> -->
+		<column type="java.util.List" of="net.sf.mpxj.Relation">Successors</column>
+		<column type="java.lang.Boolean">Summary</column>
+		<column type="java.util.Date">SummaryProgress</column>
+		<!-- Scheduled Variance -->
+		<!-- <column type="java.lang.Number">SV</column> -->
+		<!-- <column type="net.sf.mpxj.TaskMode">TaskMode</column> -->
+
+		<!-- Retrieve a text value by index getText(int) -->
+		<!-- <column type="java.lang.String" params="{index}">Text</column> -->
+		<column type="java.lang.String">
+			<name>TEXT1</name>
+			<method>getText</method>
+			<params>
+				<parameter type="int">1</parameter>
+			</params>
+		</column>
+		<column type="java.lang.String">
+			<name>TEXT10</name>
+			<method>getText</method>
+			<params>
+				<parameter type="int">10</parameter>
+			</params>
+		</column>
+
+		<column type="net.sf.mpxj.Duration">TotalSlack</column>
+		<column type="net.sf.mpxj.TaskType" attribute="toString()">Type</column>
+		<column type="java.lang.Integer">UniqueID</column>
+		<!-- <column type="java.lang.Boolean">UpdateNeeded</column> -->
+		<!-- <column type="java.lang.String">WBS</column> -->
+		<!-- <column type="java.lang.String">WBSLevel</column> -->
+		<!-- <column type="net.sf.mpxj.Duration">Work</column> -->
+		<!-- <column type="net.sf.mpxj.Duration">WorkVariance</column> -->
+		<!-- <column type="java.lang.Boolean">isPredecessor</column> -->
+		<!-- <column type="java.lang.Boolean">isRelated</column> -->
+		<!-- <column type="java.lang.Boolean">isSucessor</column> -->
+	</columns>
+
+	<!-- GETTERS - no need to edit this section! -->
+	<getters>
+		<!-- <get method="iterate" type="unknown">java.util.List</get> -->
+		<get method="toString" type="java.lang.String">net.sf.mpxj.ProjectCalendar</get>
+		<get attribute="duration" type="java.lang.Double">net.sf.mpxj.Duration</get>
+		<!-- FIXED_DURATION FIXED_UNITS FIXED_WORK -->
+		<get method="toString" type="java.lang.String">
+			<class>net.sf.mpxj.TaskType</class>
+			<method>toString</method>
+			<type>java.lang.String</type>
+		</get>
+		<get method="toString" type="java.lang.String">net.sf.mpxj.Priority</get>
+		<get method="toString" type="java.lang.String">java.util.Date</get>
+		<get method="toString" type="java.lang.String">java.lang.String</get>
+		<get method="toString" type="java.lang.String">java.lang.Number</get>
+		<get method="toString" type="java.lang.String">java.lang.Boolean</get>
+	</getters>
+
+</config>

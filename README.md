@@ -9,7 +9,7 @@ Convert mpp to xls
 
 ### TODO
 
-1. Create custom getters for Duration, and others
+1. Create custom getters for net.sf.mpxj.Duration, and others
 2. Handle List of="OtherClass"
 
 ### Credits

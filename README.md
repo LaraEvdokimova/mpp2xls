@@ -7,10 +7,20 @@ Convert mpp to xls
 2. Edit the config.xml
 2. Run the MPPReadToXML.java via "Run As Application..."
 
+## Features
+
+1. Sheet of Tasks
+2. Resources (TODO)
+3. Tables (TODO)
+4. Calendars (TODO)
+5. Views (TODO)
+n. Custom Fields (TODO)
+
 ### TODO
 
 1. Create custom getters for net.sf.mpxj.Duration, and others
-2. Handle List of="OtherClass"
+2. Using the same pattern, implement sheets for Resources, Tables, Calendars & Views
+3. Handle List of="OtherClass"
 
 ### Credits
 

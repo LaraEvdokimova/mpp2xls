@@ -6,7 +6,7 @@
 
 	<!-- 1. F I L E N A M E S -->
 	<!-- type = [mpp|mpx] -->
-	<infile type="mpp">test.mpp</infile>
+	<infile type="mpp">Matrix Integrated Programme Plan - v1.11.mpp</infile>
 	<!-- only .xls supported -->
 	<outfile>test.xls</outfile>
 
@@ -16,9 +16,21 @@
 	<tasks>true</tasks>
 	<resources>false</resources>
 
-	<!-- 2. U N / C O M M E N T C O L U M N S A S N E E D E D -->
+	<!-- 2. U N / C O M M E N T   C O L U M N S   A S   N E E D E D -->
 	<columns>
 		<!-- http://www.mpxj.org/apidocs/index.html -->
+		<column type="java.lang.Integer">ID</column>
+		<column type="java.lang.String">Name</column>
+<!-- 			<name>Name</name> -->
+<!-- 			<method>Name</method> -->
+<!-- 			<cellstyle> -->
+<!-- 				<indention dataType="short" accessType="method" valueOf="getOutlineLevel"></indention> -->
+<!-- 				<bold></bold> -->
+<!-- 			</cellstyle> -->
+<!-- 		</column> -->
+
+		<column type="java.lang.Integer">OutlineLevel</column>
+
 		<column type="java.lang.String">Active</column>
 		<column type="java.util.List" of="ActivityCodeValue">ActivityCodes</column>
 		<column type="java.lang.Number">ActualCost</column>
@@ -110,7 +122,6 @@
 		<!-- <column type="java.lang.String">Hyperlink</column> -->
 		<!-- <column type="java.lang.String">HyperlinkAddress</column> -->
 		<!-- <column type="java.lang.String">HyperlinkSubAddress</column> -->
-		<column type="java.lang.Integer">ID</column>
 		<!-- <column type="java.lang.String">IgnoreResourceCalendar</column> -->
 		<!-- <column type="java.lang.String">LateFinish</column> -->
 		<!-- <column type="java.lang.String">LateStart</column> -->
@@ -122,7 +133,6 @@
 		<!-- <column type="Duration">ManualDuration</column> -->
 		<!-- <column type="java.lang.Boolean">Marked</column> -->
 		<column type="java.lang.Boolean">Milestone</column>
-		<column type="java.lang.String">Name</column>
 		<column type="java.lang.String">Notes</column>
 		<column type="java.lang.Boolean">Null</column>
 		<!-- getNumber(index) -->
@@ -138,7 +148,6 @@
 			</params>
 		</column>
 
-		<column type="java.lang.Integer">OutlineLevel</column>
 		<column type="java.lang.String">OutlineNumber</column>
 		<column type="java.lang.Boolean">OverAllocated</column>
 		<column type="java.lang.Number">OvertimeCost</column>
@@ -218,6 +227,7 @@
 		<!-- <column type="java.lang.Boolean">isRelated</column> -->
 		<!-- <column type="java.lang.Boolean">isSucessor</column> -->
 	</columns>
+
 
 	<!-- GETTERS - no need to edit this section! -->
 	<getters>

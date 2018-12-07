@@ -9,6 +9,8 @@ Convert mpp to xls
 
 ## Features
 
+The resulting .xls file will contain:
+
 1. Sheet of Tasks
 2. Resources (TODO)
 3. Tables (TODO)

@@ -101,6 +101,9 @@ public class XMLConfigReader {
 						case "java.lang.Integer":
 							param.value = new Integer(pEl.getTextContent());
 							break;
+						case "java.lang.Number":
+							param.value = new Double(pEl.getTextContent());
+							break;
 						case "java.lang.String":
 							param.value = pEl.getTextContent();
 							break;

@@ -5,6 +5,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.poi.ss.usermodel.CellType;
+
+import me.colley.mpp2xls.config.xml.MyCellStyle;
 import me.colley.mpp2xls.config.xml.MyParameter;
 
 //import me.colley.mpp2xls.config.xml.Parameter;
@@ -23,6 +26,7 @@ public class Column implements Serializable {
 	public String type;
 	public String method;
 	public String of;
+	public MyCellStyle cellstyle;
 	// public Class<?>[] params;
 	// public Parameter[] params;
 	public List<MyParameter> params;
@@ -53,11 +57,14 @@ public class Column implements Serializable {
 		// break;
 		case 1:
 			MyParameter o = this.params.iterator().next();
-			//String className = o.getClass().toString();
+			// String className = o.getClass().toString();
 			switch (o.type) {
 			case "int":
 			case "java.lang.Integer":
 				ret = Integer.TYPE;
+				break;
+			case "java.lang.Number":
+				ret = Double.class;
 				break;
 			case "java.lang.String":
 				ret = String.class;
@@ -103,5 +110,30 @@ public class Column implements Serializable {
 			ret = null;
 		}
 		return ret;
+	}
+
+	public CellType getCellType() {
+		// TODO Auto-generated method stub
+		CellType ct = null;
+		switch (this.type) {
+		case "java.lang.String":
+			ct = CellType.STRING;
+			break;
+		case "int":
+		case "long":
+		case "float":
+		case "double":
+		case "java.lang.Float":
+		case "java.lang.Double":
+		case "java.lang.Long":
+		case "java.lang.Number":
+		case "java.lang.Integer":
+			ct = CellType.NUMERIC;
+			break;
+		default:
+			ct = CellType.STRING;
+			break;
+		}
+		return ct;
 	}
 }

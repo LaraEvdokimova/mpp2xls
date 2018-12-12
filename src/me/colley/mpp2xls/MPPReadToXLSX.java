@@ -33,6 +33,7 @@ import net.sf.mpxj.reader.UniversalProjectReader;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook; //.XSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -179,7 +180,9 @@ public class MPPReadToXLSX extends Object {
 				me.colley.mpp2xls.config.Column col = ic.next();
 				try {
 					Method method;
+					Object val;
 					Cell cell = row.createCell(j);
+					cell.setCellType(col.getCellType());
 					//Field f = (Field) task.getFieldByAlias(c.name);
 					if(col.method != null) {
 						//task.getOutlineCode(1);
@@ -188,16 +191,43 @@ public class MPPReadToXLSX extends Object {
 						method = task.getClass().getMethod(col.method, paramTypes );
 						method.setAccessible(true);
 						Object args = col.getInvokeParams();
-						Object val = method.invoke(task, args);
-						String toStr = val != null ? val.toString() : "";
-						cell.setCellValue(toStr);
+						val = method.invoke(task, args);
+						// String toStr = val != null ? val.toString() : "";
+						// cell.setCellValue(toStr);
+						// //cell.getCellStyle().setIndention((short) 1);
 					} else {
 						method = task.getClass().getMethod("get"+col.name);
 						method.setAccessible(true);
-						Object val = method.invoke(task);
-						String toStr = val != null ? val.toString() : "";
-						cell.setCellValue(toStr);
+						val = method.invoke(task);
 					}
+					switch(cell.getCellTypeEnum()) {
+						case NUMERIC:
+							switch(val.getClass().getName()) {
+							case "java.lang.Integer":
+								Integer intVal = (Integer)val;
+								cell.setCellValue(intVal);
+								break;
+							case "java.lang.Long":
+								Long lVal = (Long)val;
+								cell.setCellValue(lVal);
+								break;
+							case "java.lang.Float":
+								Float fVal = (Float)val;
+								cell.setCellValue(fVal);
+								break;
+							case "java.lang.Number":
+							case "java.lang.Double":
+								Double dVal = new Double((double)val);
+								cell.setCellValue(dVal);
+								break;
+							}
+							break;
+						case STRING:
+						default:
+							String toStr = val != null ? val.toString() : "";
+							cell.setCellValue(toStr);
+					}
+					
 				} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NullPointerException e) {
 					// TODO Auto-generated catch block
 					System.out.println("ERROR: c.name = "+col.name);

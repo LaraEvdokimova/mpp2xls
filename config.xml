@@ -6,9 +6,9 @@
 
 	<!-- 1. F I L E N A M E S -->
 	<!-- type = [mpp|mpx] -->
-	<infile type="mpp">C:/Users/colleyd2/OneDrive - CPGPLC/Documents/PMO/Matrix Integrated Programme Plan v1.18.mpp</infile>
+	<infile type="mpp">C:/Users/path/to/Programme Plan v1.18.mpp</infile>
 	<!-- only .xls supported -->
-	          <outfile>C:/Users/colleyd2/OneDrive - CPGPLC/Documents/PMO/Matrix Integrated Programme Plan v1.18-2018.12.13-dates.xls</outfile>
+	          <outfile>C:/Users/path/to/Programme Plan v1.18.xls</outfile>
 
 	<!-- sheets to be created in workbook -->
 	<tables>true</tables>
@@ -45,7 +45,7 @@
 		<column type="java.util.Date">ActualStart</column>
 		<column type="net.sf.mpxj.Duration">ActualWork</column>
 		<column type="net.sf.mpxj.Duration">ActualWorkProtected</column>
-<!-- 		<column type="java.lang.Number">ACWP</column> -->
+		<!-- <column type="java.lang.Number">ACWP</column> -->
 		<column type="java.lang.Number">BaselineCost</column>
 		<column type="net.sf.mpxj.Duration">BaselineDuration</column>
 		<column type="java.lang.String">BaselineDurationText</column>
@@ -59,7 +59,7 @@
 		<column type="java.util.Date">BaselineStart</column>
 		<column type="java.lang.String">BaselineStartText</column>
 		<column type="net.sf.mpxj.Duration">BaselineWork</column>
-<!-- 		<column type="java.lang.Number">BCWP</column> -->
+		<!-- <column type="java.lang.Number">BCWP</column> -->
 		<!-- <column type="java.lang.Number">BCWS</column> -->
 		<!-- <column type="java.lang.Object">CachedValue</column> -->
 		<column type="net.sf.mpxj.ProjectCalendar">Calendar</column>
@@ -76,7 +76,7 @@
 		<column type="java.lang.String">Critical</column>
 		
 		<!-- don't use this one! -->
-<!-- 		<column type="java.lang.String">CurrentValue</column> -->
+		<!-- <column type="java.lang.String">CurrentValue</column> -->
 		<column type="java.lang.String">CV</column>
 
 		<!-- getDate(int) 1..10 -->

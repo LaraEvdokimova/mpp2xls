@@ -16,7 +16,7 @@ The resulting .xls file will contain:
 3. Tables (TODO)
 4. Calendars (TODO)
 5. Views (TODO)
-n. Custom Fields (TODO)
+6. Custom Fields (TODO)
 
 ### TODO
 

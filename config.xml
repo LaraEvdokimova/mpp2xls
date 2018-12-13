@@ -6,15 +6,18 @@
 
 	<!-- 1. F I L E N A M E S -->
 	<!-- type = [mpp|mpx] -->
-	<infile type="mpp">/Users/derek/Dropbox/Compass/PMO/Matrix Integrated Programme Plan v1.12.mpp</infile>
+	<infile type="mpp">C:/Users/colleyd2/OneDrive - CPGPLC/Documents/PMO/Matrix Integrated Programme Plan v1.18.mpp</infile>
 	<!-- only .xls supported -->
-	<outfile>/Users/derek/Dropbox/Compass/PMO/Matrix Integrated Programme Plan v1.12.xls</outfile>
+	          <outfile>C:/Users/colleyd2/OneDrive - CPGPLC/Documents/PMO/Matrix Integrated Programme Plan v1.18-2018.12.13-dates.xls</outfile>
 
 	<!-- sheets to be created in workbook -->
 	<tables>true</tables>
 	<calendars>false</calendars>
 	<tasks>true</tasks>
 	<resources>false</resources>
+
+	<!-- Java Date Format -->
+	<dateFormat>yyyy/mm/dd</dateFormat>
 
 	<!-- 2. U N / C O M M E N T   C O L U M N S   A S   N E E D E D -->
 	<columns>
@@ -42,7 +45,7 @@
 		<column type="java.util.Date">ActualStart</column>
 		<column type="net.sf.mpxj.Duration">ActualWork</column>
 		<column type="net.sf.mpxj.Duration">ActualWorkProtected</column>
-		<column type="java.lang.Number">ACWP</column>
+<!-- 		<column type="java.lang.Number">ACWP</column> -->
 		<column type="java.lang.Number">BaselineCost</column>
 		<column type="net.sf.mpxj.Duration">BaselineDuration</column>
 		<column type="java.lang.String">BaselineDurationText</column>
@@ -56,7 +59,7 @@
 		<column type="java.util.Date">BaselineStart</column>
 		<column type="java.lang.String">BaselineStartText</column>
 		<column type="net.sf.mpxj.Duration">BaselineWork</column>
-		<column type="java.lang.Number">BCWP</column>
+<!-- 		<column type="java.lang.Number">BCWP</column> -->
 		<!-- <column type="java.lang.Number">BCWS</column> -->
 		<!-- <column type="java.lang.Object">CachedValue</column> -->
 		<column type="net.sf.mpxj.ProjectCalendar">Calendar</column>
@@ -200,20 +203,38 @@
 
 		<!-- Retrieve a text value by index getText(int) -->
 		<!-- <column type="java.lang.String" params="{index}">Text</column> -->
-		<column type="java.lang.String">
-			<name>TEXT1</name>
-			<method>getText</method>
-			<params>
-				<parameter type="int">1</parameter>
-			</params>
-		</column>
-		<column type="java.lang.String">
-			<name>TEXT10</name>
-			<method>getText</method>
-			<params>
-				<parameter type="int">10</parameter>
-			</params>
-		</column>
+<!-- 		<column type="java.lang.String"><name>TEXT1</name><method>getText</method><params><parameter type="int">1</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT2</name><method>getText</method><params><parameter type="int">2</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT3</name><method>getText</method><params><parameter type="int">3</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT4</name><method>getText</method><params><parameter type="int">4</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT5</name><method>getText</method><params><parameter type="int">5</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT6</name><method>getText</method><params><parameter type="int">6</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT7</name><method>getText</method><params><parameter type="int">7</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT8</name><method>getText</method><params><parameter type="int">8</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT9</name><method>getText</method><params><parameter type="int">9</parameter></params></column> -->
+		<!-- Jira Ref -->
+		<column type="java.lang.String"><name>TEXT10</name><method>getText</method><params><parameter type="int">10</parameter></params></column>
+<!-- 		<column type="java.lang.String"><name>TEXT11</name><method>getText</method><params><parameter type="int">11</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT12</name><method>getText</method><params><parameter type="int">12</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT13</name><method>getText</method><params><parameter type="int">13</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT14</name><method>getText</method><params><parameter type="int">14</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT15</name><method>getText</method><params><parameter type="int">15</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT16</name><method>getText</method><params><parameter type="int">16</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT17</name><method>getText</method><params><parameter type="int">17</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT18</name><method>getText</method><params><parameter type="int">18</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT19</name><method>getText</method><params><parameter type="int">19</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT20</name><method>getText</method><params><parameter type="int">20</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT21</name><method>getText</method><params><parameter type="int">21</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT22</name><method>getText</method><params><parameter type="int">22</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT23</name><method>getText</method><params><parameter type="int">23</parameter></params></column> -->
+		<!-- Workstream Alignment Meeting -->
+		<column type="java.lang.String"><name>Worstream Alignment Meeting</name><method>getText</method><params><parameter type="int">24</parameter></params></column>
+<!-- 		<column type="java.lang.String"><name>TEXT25</name><method>getText</method><params><parameter type="int">25</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT26</name><method>getText</method><params><parameter type="int">26</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT27</name><method>getText</method><params><parameter type="int">27</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT28</name><method>getText</method><params><parameter type="int">28</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT29</name><method>getText</method><params><parameter type="int">29</parameter></params></column> -->
+<!-- 		<column type="java.lang.String"><name>TEXT30</name><method>getText</method><params><parameter type="int">30</parameter></params></column> -->
 
 		<column type="net.sf.mpxj.Duration">TotalSlack</column>
 		<column type="net.sf.mpxj.TaskType" attribute="toString()">Type</column>

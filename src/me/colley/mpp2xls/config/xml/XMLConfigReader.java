@@ -48,6 +48,15 @@ public class XMLConfigReader {
 			config.outfile = doc.getElementsByTagName("outfile").item(0).getTextContent();
 			System.out.println("outfile :" + config.outfile);
 
+			config.dateFormat = doc.getElementsByTagName("dateFormat").item(0).getTextContent();
+			System.out.println("dateFormat :" + config.dateFormat);
+//			NodeList defaults = doc.getElementsByTagName("dateFormat");
+//			for( int i = 0; i < defaults.getLength(); i++ ) {
+//				//config.defaults.dateFormat = doc.getElementsByTagName("dateFormat").item(0).getTextContent();
+//				Node n = defaults.item(i);
+//				System.out.println(n.toString());
+//			}
+
 			NodeList nodeList = doc.getElementsByTagName("column");
 			// now XML is loaded as Document in memory, lets convert it to
 			// Object List

@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import me.colley.mpp2xls.config.xml.Defaults;
+
 @XmlRootElement(name = "config")
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class Config implements Serializable {
@@ -15,6 +17,8 @@ public class Config implements Serializable {
 
 	public String infile;
 	public String outfile;
+	public String dateFormat;
+//	public Defaults defaults;
 	public List<Column> columns = new ArrayList<Column>();
 
 	public Config() {
@@ -22,7 +26,7 @@ public class Config implements Serializable {
 		System.out.println("Employee.java init without params");
 	}
 
-	public Config(String infile, String outfile, List<Column> columns) {
+	public Config(String infile, String outfile, String dateFormat, List<Column> columns) {
 		super();
 		System.out.println("Employee.java init with params");
 		this.infile = infile;

@@ -33,7 +33,9 @@ import net.sf.mpxj.reader.UniversalProjectReader;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook; //.XSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -74,9 +76,9 @@ public class MPPReadToXLSX extends Object {
 
 		@SuppressWarnings("unchecked")
 		List<me.colley.mpp2xls.config.Column> columns = (List<me.colley.mpp2xls.config.Column>) config.getColumns();
-//		for (me.colley.mpp2xls.config.Column col : columns) {
-//			System.out.println(col.toString());
-//		}
+		// for (me.colley.mpp2xls.config.Column col : columns) {
+		// System.out.println(col.toString());
+		// }
 
 		// read the file
 		try {
@@ -140,6 +142,7 @@ public class MPPReadToXLSX extends Object {
 
 	/**
 	 * T A S K S
+	 * 
 	 * @param pf
 	 * @param wb
 	 * @param config
@@ -160,15 +163,20 @@ public class MPPReadToXLSX extends Object {
 			// cell.setCellStyle(headerCellStyle);
 		}
 
+		CellStyle cellStyleDate = wb.createCellStyle();
+		CreationHelper createHelper = wb.getCreationHelper();
+		String dateFormat = config.dateFormat;
+		cellStyleDate.setDataFormat(
+		    createHelper.createDataFormat().getFormat(dateFormat));
+
 		// DATA ROWS
-		//int rowNum = 1;
 		Iterator<Task> it = tc.iterator();
 		for (int i = 0; it.hasNext(); i++) {
 			// Task t = tc.get(i);
 			Task task = it.next();
 			// task.getEnterpriseCustomField(TaskField.TEXT1);
-			//task.getOutlineCode(index)
-			//task.getText(index)
+			// task.getOutlineCode(index)
+			// task.getText(index)
 			task.getID();
 
 			// Row row = sheet.createRow(rowNum++);
@@ -183,12 +191,12 @@ public class MPPReadToXLSX extends Object {
 					Object val;
 					Cell cell = row.createCell(j);
 					cell.setCellType(col.getCellType());
-					//Field f = (Field) task.getFieldByAlias(c.name);
-					if(col.method != null) {
-						//task.getOutlineCode(1);
-						//task.getCurrentValue(field)
+					// Field f = (Field) task.getFieldByAlias(c.name);
+					if (col.method != null) {
+						// task.getOutlineCode(1);
+						// task.getCurrentValue(field)
 						Class<?> paramTypes = col.getParameterTypes();
-						method = task.getClass().getMethod(col.method, paramTypes );
+						method = task.getClass().getMethod(col.method, paramTypes);
 						method.setAccessible(true);
 						Object args = col.getInvokeParams();
 						val = method.invoke(task, args);
@@ -196,28 +204,35 @@ public class MPPReadToXLSX extends Object {
 						// cell.setCellValue(toStr);
 						// //cell.getCellStyle().setIndention((short) 1);
 					} else {
-						method = task.getClass().getMethod("get"+col.name);
+						method = task.getClass().getMethod("get" + col.name);
 						method.setAccessible(true);
 						val = method.invoke(task);
 					}
-					switch(cell.getCellTypeEnum()) {
+					if (val != null) {
+						switch (cell.getCellTypeEnum()) {
 						case NUMERIC:
-							switch(val.getClass().getName()) {
+							switch (val.getClass().getName()) {
+							case "java.util.Date":
+								Date dateVal = (Date) val;
+								cell.setCellValue(dateVal);
+								cell.setCellStyle(cellStyleDate);
+								
+								break;
 							case "java.lang.Integer":
-								Integer intVal = (Integer)val;
+								Integer intVal = (Integer) val;
 								cell.setCellValue(intVal);
 								break;
 							case "java.lang.Long":
-								Long lVal = (Long)val;
+								Long lVal = (Long) val;
 								cell.setCellValue(lVal);
 								break;
 							case "java.lang.Float":
-								Float fVal = (Float)val;
+								Float fVal = (Float) val;
 								cell.setCellValue(fVal);
 								break;
 							case "java.lang.Number":
 							case "java.lang.Double":
-								Double dVal = new Double((double)val);
+								Double dVal = new Double((double) val);
 								cell.setCellValue(dVal);
 								break;
 							}
@@ -226,11 +241,13 @@ public class MPPReadToXLSX extends Object {
 						default:
 							String toStr = val != null ? val.toString() : "";
 							cell.setCellValue(toStr);
+						}
 					}
-					
-				} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NullPointerException e) {
+
+				} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
+						| InvocationTargetException | NullPointerException e) {
 					// TODO Auto-generated catch block
-					System.out.println("ERROR: c.name = "+col.name);
+					System.out.println("ERROR: c.name = " + col.name);
 					e.printStackTrace();
 				}
 			}
@@ -255,12 +272,37 @@ public class MPPReadToXLSX extends Object {
 			// break;
 			// }
 		}
-		// for (Task task : project.getTasks())
-		// {
-		// System.out.println("Task: " + task.getName() + " ID=" + task.getID()
-		// + " Unique ID=" + task.getUniqueID());
-		// }
-		// return sheet;
+
+		// tasks = 0-based, line 0 has data
+		// sheet = 0-based, line 0 has headers
+		sheet.setRowSumsBelow(false);
+		it = tc.iterator();
+		for (int i = 0; it.hasNext(); i++) {
+			if (i == tc.size())
+				break;
+			int end = seekGroupRows(tc, i);
+			if (end > i) {
+				sheet.groupRow(i + 2, end + 1);
+			}
+		}
+	}
+
+	public static int seekGroupRows(TaskContainer tc, int from) {
+		int marker = from;
+		if (from > tc.size())
+			return from;
+		int pl = tc.get(from).getOutlineLevel(); // parent level
+		int sz = tc.size();
+		for (int i = from + 1; i < sz; i++) {
+			int cl = tc.get(i).getOutlineLevel(); // child level
+			if (cl > pl) {
+				marker = i;
+			}
+			if (cl <= pl) {
+				return marker;
+			}
+		}
+		return marker;
 	}
 
 	public void createCalendarsSheet(Workbook wb) {
@@ -291,8 +333,9 @@ public class MPPReadToXLSX extends Object {
 		try {
 			jaxbContext = JAXBContext.newInstance(Employee.class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			//Employee employee = (Employee) jaxbUnmarshaller.unmarshal(xmlFile);
-			//System.out.println(employee);
+			// Employee employee = (Employee)
+			// jaxbUnmarshaller.unmarshal(xmlFile);
+			// System.out.println(employee);
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}

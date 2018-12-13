@@ -69,6 +69,9 @@ public class Column implements Serializable {
 			case "java.lang.String":
 				ret = String.class;
 				break;
+			case "java.util.Date":
+				ret = java.util.Date.class;
+				break;
 			default:
 				ret = o.getClass();
 			}
@@ -117,6 +120,7 @@ public class Column implements Serializable {
 		CellType ct = null;
 		switch (this.type) {
 		case "java.lang.String":
+//		case "java.util.Date":
 			ct = CellType.STRING;
 			break;
 		case "int":
@@ -128,6 +132,7 @@ public class Column implements Serializable {
 		case "java.lang.Long":
 		case "java.lang.Number":
 		case "java.lang.Integer":
+		case "java.util.Date":
 			ct = CellType.NUMERIC;
 			break;
 		default:

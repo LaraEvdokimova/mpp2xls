@@ -95,6 +95,9 @@ public class XMLConfigReader {
 				col.name = colElement.getElementsByTagName("name").item(0).getTextContent(); // .item(0).toString();
 				col.method = colElement.getElementsByTagName("method").item(0).getTextContent();
 				col.params = new ArrayList<MyParameter>();
+//				col.cellstyle = new MyCellStyle();
+				col.cellstyle = colElement.getAttribute("cellstyle");
+//				System.out.println("cellstyle: " + col.cellstyle);
 
 				// <params>
 				NodeList paramList = colElement.getElementsByTagName("parameter");
@@ -132,6 +135,8 @@ public class XMLConfigReader {
 				col.name = colElement.getTextContent();
 				col.type = colElement.getAttribute("type");
 				col.of = colElement.getAttribute("of");
+				col.cellstyle = colElement.getAttribute("cellstyle");
+//				System.out.println("2-cellstyle: " + col.cellstyle);
 			}
 		}
 		return col;

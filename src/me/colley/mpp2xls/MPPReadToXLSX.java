@@ -163,11 +163,34 @@ public class MPPReadToXLSX extends Object {
 			// cell.setCellStyle(headerCellStyle);
 		}
 
+		int styleOffset = wb.getNumCellStyles();
+		CellStyle styles0 = wb.createCellStyle(); styles0.setIndention((short) (0) );
+		CellStyle styles1 = wb.createCellStyle(); styles1.setIndention((short) (1) );
+		CellStyle styles2 = wb.createCellStyle(); styles2.setIndention((short) (2) );
+		CellStyle styles3 = wb.createCellStyle(); styles3.setIndention((short) (3) );
+		CellStyle styles4 = wb.createCellStyle(); styles4.setIndention((short) (4) );
+		CellStyle styles5 = wb.createCellStyle(); styles5.setIndention((short) (5) );
+		CellStyle styles6 = wb.createCellStyle(); styles6.setIndention((short) (6) );
+		CellStyle styles7 = wb.createCellStyle(); styles7.setIndention((short) (7) );
+		CellStyle styles8 = wb.createCellStyle(); styles8.setIndention((short) (8) );
+		CellStyle styles9 = wb.createCellStyle(); styles9.setIndention((short) (9) );
+		CellStyle styles10 = wb.createCellStyle(); styles10.setIndention((short) (10) );
+		CellStyle styles11 = wb.createCellStyle(); styles11.setIndention((short) (11) );
+		CellStyle styles12 = wb.createCellStyle(); styles12.setIndention((short) (12) );
+				
+//		CellStyle styles[] = {
+//				styles0,styles1,styles2,styles3,styles4,styles5,
+//				styles6,styles7,styles8,styles9,styles10,styles11,styles12 
+//		};		
+		System.out.println("styleOffset: "+styleOffset );
+		
 		CellStyle cellStyleDate = wb.createCellStyle();
 		CreationHelper createHelper = wb.getCreationHelper();
 		String dateFormat = config.dateFormat;
 		cellStyleDate.setDataFormat(
 		    createHelper.createDataFormat().getFormat(dateFormat));
+		
+		System.out.println("getNumCellStyles(): "+wb.getNumCellStyles() );
 
 		// DATA ROWS
 		Iterator<Task> it = tc.iterator();
@@ -186,6 +209,10 @@ public class MPPReadToXLSX extends Object {
 			ic = config.columns.iterator();
 			for (int j = 0; ic.hasNext(); j++) {
 				me.colley.mpp2xls.config.Column col = ic.next();
+				
+//				System.out.println("col.name: "+col.name);	
+//				System.out.println("col.cellstyle: "+col.cellstyle);	
+				
 				try {
 					Method method;
 					Object val;
@@ -196,7 +223,10 @@ public class MPPReadToXLSX extends Object {
 						// task.getOutlineCode(1);
 						// task.getCurrentValue(field)
 						Class<?> paramTypes = col.getParameterTypes();
-						method = task.getClass().getMethod(col.method, paramTypes);
+						if(paramTypes != null) 
+							method = task.getClass().getMethod(col.method, paramTypes);
+						else 
+							method = task.getClass().getMethod(col.method);
 						method.setAccessible(true);
 						Object args = col.getInvokeParams();
 						val = method.invoke(task, args);
@@ -207,7 +237,8 @@ public class MPPReadToXLSX extends Object {
 						method = task.getClass().getMethod("get" + col.name);
 						method.setAccessible(true);
 						val = method.invoke(task);
-					}
+					} // col.method
+
 					if (val != null) {
 						switch (cell.getCellTypeEnum()) {
 						case NUMERIC:
@@ -216,7 +247,6 @@ public class MPPReadToXLSX extends Object {
 								Date dateVal = (Date) val;
 								cell.setCellValue(dateVal);
 								cell.setCellStyle(cellStyleDate);
-								
 								break;
 							case "java.lang.Integer":
 								Integer intVal = (Integer) val;
@@ -242,7 +272,37 @@ public class MPPReadToXLSX extends Object {
 							String toStr = val != null ? val.toString() : "";
 							cell.setCellValue(toStr);
 						}
-					}
+					} // col.val
+
+//					// Col/cell format
+//					if(col.cellstyle != null) {
+//						System.out.print("col.cellstyle.toString(): "+ col.cellstyle.toString());
+//						switch(col.cellstyle.toString()) {
+//							case "setIndentation":
+//								
+//								CellStyle style;
+//	//							style = (CellStyle) col.cellstyle;
+//							    style = wb.createCellStyle();
+//							    style.setIndention((short) 1);
+//								cell.setCellStyle(style);
+//						}
+////						CellStyle style;
+////						style = (CellStyle) col.cellstyle;
+//////					    style = wb.createCellStyle();
+//////					    style.setIndention((short) 1);
+//////					    style.setAlignment(HorizontalAlignment.CENTER);
+//////					    style.setWrapText(true);
+//////					    style.setBorderRight(BorderStyle.THIN);
+//////					    style.setRightBorderColor(IndexedColors.BLACK.getIndex());
+//////					    style.setBorderLeft(BorderStyle.THIN);
+//////					    style.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+//////					    style.setBorderTop(BorderStyle.THIN);
+//////					    style.setTopBorderColor(IndexedColors.BLACK.getIndex());
+//////					    style.setBorderBottom(BorderStyle.THIN);
+//////					    style.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+//////					    style.setDataFormat(doubleDataFormat);
+////						cell.setCellStyle(style);
+//					}
 
 				} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
 						| InvocationTargetException | NullPointerException e) {
@@ -250,7 +310,35 @@ public class MPPReadToXLSX extends Object {
 					System.out.println("ERROR: c.name = " + col.name);
 					e.printStackTrace();
 				}
+			} // Row
+			
+			// get OutlineLevel
+			int outlineLevel = 0;
+			ic = config.columns.iterator();
+			for (int j = 0; ic.hasNext(); j++) {
+				me.colley.mpp2xls.config.Column col = ic.next();
+				if(col.name.equals("OutlineLevel")) {
+					outlineLevel = (int) row.getCell(j).getNumericCellValue();
+//					System.out.println("outlineLevel: "+outlineLevel);
+				}
 			}
+
+			ic = config.columns.iterator();
+			for (int j = 0; ic.hasNext(); j++) {
+				me.colley.mpp2xls.config.Column col = ic.next();
+				//System.out.println(col.name +": "+col.cellstyle);
+				if( col.cellstyle.equals("indentation")) {
+					Cell cell = row.getCell(j);
+//					System.out.println("col.cellstyle: "+ col.cellstyle 
+//							+ ": " + outlineLevel
+//							+ " : "
+//							+ cell.getStringCellValue() );
+					//cellStyleIndentation.setIndention((short) (outlineLevel));
+//					cell.setCellStyle(styles[outlineLevel]);
+					cell.setCellStyle(wb.getCellStyleAt(outlineLevel+styleOffset));
+				}
+			}
+			
 			// else {
 			// // System.out.println(task.getName().toString());
 			// // CustomField cf = t.
@@ -291,10 +379,20 @@ public class MPPReadToXLSX extends Object {
 		int marker = from;
 		if (from > tc.size())
 			return from;
-		int pl = tc.get(from).getOutlineLevel(); // parent level
+		int pl = 0;
+		try{
+			pl = tc.get(from).getOutlineLevel(); // parent level
+		} catch (NullPointerException e) {
+			pl=9;
+		}
 		int sz = tc.size();
 		for (int i = from + 1; i < sz; i++) {
-			int cl = tc.get(i).getOutlineLevel(); // child level
+			int cl = 0;
+			try {
+				cl = tc.get(i).getOutlineLevel(); // child level
+			} catch(NullPointerException n) {
+				cl = 0;
+			}
 			if (cl > pl) {
 				marker = i;
 			}

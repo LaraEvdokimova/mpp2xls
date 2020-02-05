@@ -269,7 +269,7 @@ public class TestOne extends Object {
 
 	public static void main(String[] args) throws MPXJException {
 
-		xmlTest();
+//		xmlTest();
 		// propertiesTest();
 
 	} // main()

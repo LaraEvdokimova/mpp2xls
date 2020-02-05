@@ -6,7 +6,7 @@ Convert mpp to xls
 1. git clone https://github.com/dcolley/mpp2xls this project to local
 2. Load the project in Eclipse
 3. Edit the config.xml, change the column order if you like..!
-4. Run the MPPReadToXML.java via "Run As Application..."
+4. Run the me.colley.mpp2xls.MPPReadToXML.java via "Run As Application..."
 
 ## Features
 

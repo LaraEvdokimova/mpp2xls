@@ -23,12 +23,12 @@ public class Config implements Serializable {
 
 	public Config() {
 		super();
-		System.out.println("Employee.java init without params");
+		System.out.println("Config.java init without params");
 	}
 
 	public Config(String infile, String outfile, String dateFormat, List<Column> columns) {
 		super();
-		System.out.println("Employee.java init with params");
+		System.out.println("Config.java init with params");
 		this.infile = infile;
 		this.outfile = outfile;
 		this.columns = columns;

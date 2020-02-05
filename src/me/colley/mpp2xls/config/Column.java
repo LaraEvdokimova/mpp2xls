@@ -5,7 +5,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Workbook;
 
 import me.colley.mpp2xls.config.xml.MyCellStyle;
 import me.colley.mpp2xls.config.xml.MyParameter;
@@ -26,7 +28,8 @@ public class Column implements Serializable {
 	public String type;
 	public String method;
 	public String of;
-	public MyCellStyle cellstyle;
+	public String cellstyle;
+//	public MyCellStyle cellstyle;
 	// public Class<?>[] params;
 	// public Parameter[] params;
 	public List<MyParameter> params;
@@ -141,4 +144,14 @@ public class Column implements Serializable {
 		}
 		return ct;
 	}
+
+//	public CellStyle getCellStyle(Workbook wb) {
+//		CellStyle style = wb.createCellStyle();
+//		return style;
+//	}
+	public CellStyle getCellStyleIndentation(Workbook wb, int level) {
+		CellStyle style = wb.getCellStyleAt(level);
+		return style;
+	}
+	
 }
